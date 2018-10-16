@@ -1,0 +1,6 @@
+apps:
+  - name: homebot-homebot
+    script: ./homebot/src/app.js
+    env: 
+      NODE_ENV: test  
+      NODE_CONFIG_DIR: ./homebot/src/config/
