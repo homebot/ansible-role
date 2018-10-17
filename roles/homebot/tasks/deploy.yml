@@ -11,13 +11,13 @@
       path: "{{ www_dir }}/homebot"
     tags:
       - npm
-  - name: Copy a file pm2.yml
+  - name: Copy a file pm2-apps.yml
     copy:
-      src: pm2.yml
-      dest: "{{ www_dir }}/pm2.yml"
+      src: pm2-apps.yml
+      dest: "{{ www_dir }}/pm2-apps.yml"
     tags: pm2
-  - name: Start PM2
-    command: /usr/local/lib/npm/bin/pm2 start {{ www_dir }}/pm2.yml
+  - name: Start PM2 apps
+    command: /usr/local/lib/npm/bin/pm2 start {{ www_dir }}/pm2-apps.yml
     tags: pm2
   - name: Save PM2
     command: /usr/local/lib/npm/bin/pm2 save
