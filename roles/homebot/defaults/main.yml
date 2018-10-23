@@ -1,0 +1,12 @@
+---
+packages:
+  - asciinema
+  - curl
+  - git
+  - mc
+  - mongodb
+  - rabbitmq-server
+  - screen
+  - vim
+
+www_dir: /var/www/homebot

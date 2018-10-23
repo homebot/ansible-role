@@ -1,0 +1,25 @@
+- name: Deploy | as user
+  block:
+  - name: Get source
+    git:
+      repo: 'https://github.com/homebot/homebot.git'
+      dest: "{{ www_dir }}/homebot"
+    tags:
+      - git
+  - name: Install packages based on package.json.
+    npm:
+      path: "{{ www_dir }}/homebot"
+    tags:
+      - npm
+  - name: Copy a file pm2-apps.yml
+    copy:
+      src: pm2-apps.yml
+      dest: "{{ www_dir }}/pm2-apps.yml"
+    tags: pm2
+  - name: Start PM2 apps
+    command: /usr/local/lib/npm/bin/pm2 start {{ www_dir }}/pm2-apps.yml
+    tags: pm2
+  - name: Save PM2
+    command: /usr/local/lib/npm/bin/pm2 save
+    tags: pm2
+  tags: deploy

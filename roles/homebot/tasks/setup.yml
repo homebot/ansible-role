@@ -1,0 +1,23 @@
+- name: Setup | as root
+  block:
+  - name: Update repositories cache and install packages
+    apt:
+      name: "{{ packages }}"
+      update_cache: yes
+      cache_valid_time: 600
+    tags:
+      - apt
+  - name: Generating a PM2 startup script
+    shell: env PATH=$PATH:/usr/bin /usr/local/lib/npm/bin/pm2 startup systemd -u {{ ansible_user_id }} --hp /home/{{ ansible_user_id }}
+    tags:
+      - pm2
+  - name: Create a directory if it doesn't exist
+    file:
+      path: "{{ www_dir }}"
+      state: directory
+      owner: "{{ ansible_user_id }}"
+      mode: 0755
+  become: yes
+  become_method: su
+  tags:
+    - setup

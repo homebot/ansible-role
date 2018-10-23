@@ -1,0 +1,14 @@
+---
+- hosts: vagrant
+  roles:
+    - role: geerlingguy.nodejs
+      become: yes
+      become_method: su 
+      tags:
+      - setup
+    - homebot
+  vars:
+    nodejs_version: "10.x"
+    nodejs_npm_global_packages:
+    - node-red
+    - pm2
